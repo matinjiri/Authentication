@@ -6,8 +6,15 @@ export function setupSwagger(app: INestApplication): void {
     .setTitle("E-Commerce API")
     .setDescription("API documentation for the eCommerce platform")
     .setVersion("1.0")
-    .addBearerAuth()
+        .addBearerAuth(
+      {
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        type: 'http',
+      },
+      'Authorization',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("docs", app, document);
+  SwaggerModule.setup('docs', app, document);
 }
